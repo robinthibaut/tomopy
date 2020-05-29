@@ -13,12 +13,12 @@ from crtomo.crtomo import Crtomo, datread, mesh_geometry, import_res, mtophase
 # Note: the function 'jp' simply joins the arguments to build a path.
 
 main_dir = jp(os.getcwd(), 'crtomo')  # Current working directory of the project
-data_dir = jp(main_dir, 'data')  # Data files directory
-mesh_dir = jp(main_dir, 'mesh')  # Mesh files directory
-iso_dir = jp(main_dir, 'iso')  # ISO file dir
-ref_dir = jp(main_dir, 'ref')  # Reference model files dir
-start_dir = jp(main_dir, 'start')  # Start model files dir
-results_dir = jp(main_dir, 'results')  # Results files directory
+data_dir = jp(main_dir, 'data', 'demo')  # Data files directory
+mesh_dir = jp(main_dir, 'mesh', 'demo')  # Mesh files directory
+iso_dir = jp(main_dir, 'iso', 'demo')  # ISO file dir
+ref_dir = jp(main_dir, 'ref', 'demo')  # Reference model files dir
+start_dir = jp(main_dir, 'start', 'demo')  # Start model files dir
+results_dir = jp(main_dir, 'results', 'demo')  # Results files directory
 
 # %% Exe names
 
@@ -44,14 +44,14 @@ myinv = Crtomo(working_dir=main_dir,
 
 # Data file name A B M N R in meters
 
-df = jp(data_dir, 'demo', 'demo_elecs.dat')  # Path to electrode configuration file
+df = jp(data_dir, 'demo_elecs.dat')  # Path to electrode configuration file
 dat = datread(df)  # Use built-in function to extract data (optional)
 
 # Electrode spacing in meters
 es = 5
 
 #  Electrodes elevation
-ef = jp(data_dir, 'demo', 'demo_elevation.dat')  # Data elevation file name X Z in meters
+ef = jp(data_dir, 'demo_elevation.dat')  # Data elevation file name X Z in meters
 elev = datread(ef)  # Use built-in function to extract data (optional)
 
 # %% Build the mesh
@@ -89,7 +89,7 @@ data_file = jp(data_dir, 'demo_data.dat')
 
 # Specify the path where the results will be loaded
 
-frname = 'demo'  # If you want to save the results in a sub-folder in the main results folder
+frname = ''  # If you want to save the results in a sub-folder in the main results folder
 
 result_folder = jp(results_dir, frname)
 
