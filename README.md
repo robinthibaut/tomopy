@@ -1,3 +1,3 @@
-# Crtomo package
+# tomopy
 Python toolbox to use the inversion program CRTOMO created by Kemna Andreas (2000).
-You have to get yourself a copy of the software first in order to use it.
+This package only contains a collection of methods to automate and facilitate the use of the crtomo software, which you have to obtain by yourself.
