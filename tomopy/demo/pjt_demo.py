@@ -119,7 +119,7 @@ reference_weights_file = None
 #     rw.close()
 
 # %% 22 Maximum numbers of iterations
-iterations = 1
+iterations = 20
 
 # 23 Min data RMS
 rms = 1.0000
