@@ -1,2 +1,2 @@
-# Do not forget the executables
-If you have obtained a copy of crtomo and associated softwares, one suggestion would be to copy them in this folder. Do not forget the associated DLL files.
+# exe folder
+As a suggestion, put here your executables. It is recommended to place the executables in the parent directory of child directories data and results are stored.
