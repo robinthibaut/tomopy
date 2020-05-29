@@ -2,11 +2,11 @@ import ntpath
 import os
 import shutil
 import subprocess as sp
+import warnings
 from os import listdir
 from os.path import isfile, join
 from os.path import join as jp
 from shutil import copyfile
-import warnings
 
 import numpy as np
 from scipy.interpolate import interp1d as f1d
@@ -188,27 +188,27 @@ def import_res(result_folder,
         return [r_array, p_array]
 
 
-def dirmaker(dir):
+def dirmaker(dirp):
     """
     Given a folder path, check if it exists, and if not, creates it
-    :param dir: path
+    :param dirp: path
     :return:
     """
     try:
-        if not os.path.exists(dir):
-            os.makedirs(dir)
+        if not os.path.exists(dirp):
+            os.makedirs(dirp)
     except:
         pass
 
 
-def deldir(dir):
+def deldir(dirp):
     """
     Used to delete the contents of the folder
-    :param dir: path to the folder to be emptied
+    :param dirp: path to the folder to be emptied
     :return:
     """
-    for the_file in os.listdir(dir):
-        file_path = os.path.join(dir, the_file)
+    for the_file in os.listdir(dirp):
+        file_path = os.path.join(dirp, the_file)
         try:
             if os.path.isfile(file_path):
                 os.unlink(file_path)
