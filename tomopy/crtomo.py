@@ -6,6 +6,7 @@ from os import listdir
 from os.path import isfile, join
 from os.path import join as jp
 from shutil import copyfile
+import warnings
 
 import numpy as np
 from scipy.interpolate import interp1d as f1d
@@ -105,6 +106,9 @@ def mtophase(ncycles=0,
 
     mpath = jp(os.path.dirname(os.path.abspath(__file__)), 'ip')
 
+    if not os.path.exists(mpath):
+        warnings.warn(mpath + ' folder not found')
+
     params = list(map(str, [ncycles, pulse_l, tmin, tmax]))  # Transforms the params input to string
 
     minf = jp(mpath, 'MtoPhase.cfg')  # Writing config file
@@ -114,6 +118,9 @@ def mtophase(ncycles=0,
         ms.close()
 
     #  Running m2p exe file
+    if not os.path.exists(jp(mpath, 'mtophase.exe')):
+        warnings.warn('mtophase.exe not found')
+
     sp.call([jp(mpath, 'mtophase.exe')])  # Run
 
     mm = open('MtoPhase.dat', 'r').readlines()
@@ -314,7 +321,6 @@ class Crtomo:
                  iso_dir='\\',
                  ref_dir='\\',
                  start_dir='\\',
-                 results_dir='\\',
                  crtomo_exe='crtomo.exe',
                  mesh_exe='mesh.exe'):
 
@@ -341,9 +347,12 @@ class Crtomo:
         self.crtomo_exe = crtomo_exe
 
         if not os.path.exists(crtomo_exe):  # Check if the crtomo exe files can be found.
-            print('Can not find crtomo executable')
+            warnings.warn('Can not find crtomo executable')
 
         self.mesh_exe = mesh_exe
+
+        if not os.path.exists(mesh_exe):  # Check if the crtomo exe files can be found.
+            warnings.warn('Can not find mesh executable')
 
         self.rf = ''  # Results folder
         self.mf = ''  # Mesh data file
@@ -374,7 +383,6 @@ class Crtomo:
         dat = abmn
         mesh_dir = self.mesh_dir
         mesh_exe_name = self.mesh_exe
-        cwd = self.working_dir
         elev = elevation_data
         es = electrode_spacing  # Electrode spacing
 
@@ -424,7 +432,11 @@ class Crtomo:
         evf = crtomo_file_shortener(ms_exe_f, evf)
 
         #  Writing mesh.in file
-        meshparams = ["{}".format(mesh_short), "{}".format(epfn), "Mesh", "2", "{}".format(evf), "0 0", "0.1 20 0.01 0.05"]
+        meshparams = ["{}".format(mesh_short),
+                      "{}".format(epfn),
+                      "Mesh", "2", "{}".format(evf),
+                      "0 0",
+                      "0.1 20 0.01 0.05"]
 
         meshinf = jp(os.path.dirname(self.mesh_exe), 'mesh.in')
 
